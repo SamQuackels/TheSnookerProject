@@ -1,0 +1,124 @@
+@"INSERT INTO groupmatches (group1ID, group2ID) values(x, y)"
+
+@"SELECT max(ID) from groupmatches"
+
+int matchest1won = 0
+
+@"INSERT INTO matches (GroupMatchID) values('SELECT max(ID) from groupmatches')" 
+
+int roundp1won = 0
+
+@"INSERT INTO frames (user1ID, user2ID, matchID) values('x', 'y', 'SELECT max(ID) from matches')"
+
+// Match vind plaats, er is een winnaar
+
+@"UPDATE frames SET user1won = 'x' WHERE ID =  'SELECT max(ID) from frames'
+if (x == 1) roundp1won += 1;
+
+@"INSERT INTO frames (user1ID, user2ID, matchID) values('x', 'y', 'SELECT max(ID) from matches')"
+
+// Match vind plaats, er is een winnaar
+
+@"UPDATE frames SET user1won = 'x' WHERE ID =  'SELECT max(ID) from frames'
+if (x == 1) roundp1won += 1;
+
+@"INSERT INTO frames (user1ID, user2ID, matchID) values('x', 'y', 'SELECT max(ID) from matches')"
+
+// Match vind plaats, er is een winnaar
+
+@"UPDATE frames SET user1won = 'x' WHERE ID =  'SELECT max(ID) from frames'
+if (x == 1) roundp1won += 1;
+
+if (roundp1won >= 2)
+{
+	@"UPDATE matches SET user1won = '1' WHERE ID = 'SELECT max(ID) from matches'" 
+	matchest1won ++
+}
+else 
+{
+	@"UPDATE matches SET user1won = '0' WHERE ID = 'SELECT max(ID) from matches'" 
+}
+
+
+
+@"INSERT INTO matches (GroupMatchID) values('SELECT max(ID) from groupmatches')" 
+
+int roundp1won = 0
+
+@"INSERT INTO frames (user1ID, user2ID, matchID) values('x', 'y', 'SELECT max(ID) from matches')"
+
+// Match vind plaats, er is een winnaar
+
+@"UPDATE frames SET user1won = 'x' WHERE ID =  'SELECT max(ID) from frames'
+if (x == 1) roundp1won += 1;
+
+@"INSERT INTO frames (user1ID, user2ID, matchID) values('x', 'y', 'SELECT max(ID) from matches')"
+
+// Match vind plaats, er is een winnaar
+
+@"UPDATE frames SET user1won = 'x' WHERE ID =  'SELECT max(ID) from frames'
+if (x == 1) roundp1won += 1;
+
+@"INSERT INTO frames (user1ID, user2ID, matchID) values('x', 'y', 'SELECT max(ID) from matches')"
+
+// Match vind plaats, er is een winnaar
+
+@"UPDATE frames SET user1won = 'x' WHERE ID =  'SELECT max(ID) from frames'
+if (x == 1) roundp1won += 1;
+
+if (roundp1won >= 2)
+{
+	@"UPDATE matches SET user1won = '1' WHERE ID = 'SELECT max(ID) from matches'" 
+	matchest1won ++
+}
+else 
+{
+	@"UPDATE matches SET user1won = '0' WHERE ID = 'SELECT max(ID) from matches'" 
+}
+
+
+
+@"INSERT INTO matches (GroupMatchID) values('SELECT max(ID) from groupmatches')" 
+
+int roundp1won = 0
+
+@"INSERT INTO frames (user1ID, user2ID, matchID) values('x', 'y', 'SELECT max(ID) from matches')"
+
+// Match vind plaats, er is een winnaar
+
+@"UPDATE frames SET user1won = 'x' WHERE ID =  'SELECT max(ID) from frames'
+if (x == 1) roundp1won += 1;
+
+@"INSERT INTO frames (user1ID, user2ID, matchID) values('x', 'y', 'SELECT max(ID) from matches')"
+
+// Match vind plaats, er is een winnaar
+
+@"UPDATE frames SET user1won = 'x' WHERE ID =  'SELECT max(ID) from frames'
+if (x == 1) roundp1won += 1;
+
+@"INSERT INTO frames (user1ID, user2ID, matchID) values('x', 'y', 'SELECT max(ID) from matches')"
+
+// Match vind plaats, er is een winnaar
+
+@"UPDATE frames SET user1won = 'x' WHERE ID =  'SELECT max(ID) from frames'
+if (x == 1) roundp1won += 1;
+
+if (roundp1won >= 2)
+{
+	@"UPDATE matches SET user1won = '1' WHERE ID = 'SELECT max(ID) from matches'" 
+	matchest1won ++
+}
+else 
+{
+	@"UPDATE matches SET user1won = '0' WHERE ID = 'SELECT max(ID) from matches'" 
+}
+
+
+if (matchest1won >= 2)
+{
+	@"UPDATE groupmatches SET group1win = '1' WHERE ID = 'SELECT max(ID) from groupmatches'^
+}
+else 
+{
+	@"UPDATE groupmatches SET group1win = '0' WHERE ID = 'SELECT max(ID) from groupmatches'
+}

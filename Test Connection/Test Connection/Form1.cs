@@ -25,6 +25,8 @@ namespace Test_Connection
 
         private void DBConnection()
         {
+            string s;
+
             // String aanmaken zodat je kan verbinden met de server
             string ConnectString = "datasource = localhost; port = 3306; username = root; password=; database = snooker";   
             if (tryConnection(ConnectString))
@@ -42,22 +44,29 @@ namespace Test_Connection
             string writeNames =
                 @"SELECT name FROM users;";
 
-            string addUser = 
-                @"INSERT into users (name, foto) values('Jeff', 'foto3.png')";
+            string addUser =
+                @"INSERT INTO groups (user1ID, user2ID, user3ID, naam, foto) values('1', '2', '5', 'De Quackeenden', 'foto7.png')";
+                //@"INSERT into users (name, foto, break) values('Joe Dad', 'foto6.png', '58')";
 
             string deleteUser =
                 @"DELETE FROM users WHERE users.id = 4";
+
+            string highestPKID =
+                @"SELECT max(ID) FROM groupmatches";
+
+
+
 
             //string resortPK =
             //    @"DBCC CHECKIDENT('users', RESEED, 0)";
 
             // Voert SQL Querys uit
             //ExecuteCommand(ConnectString, resortPK);
-            ExecuteCommand(ConnectString, addUser);
-            ExecuteCommand(ConnectString, updateName);
-            ExecuteCommand(ConnectString, deleteUser);        
-            GetData(ConnectString, writeNames);          
-        }
+            //ExecuteCommand(ConnectString, addUser);
+            //ExecuteCommand(ConnectString, updateName);
+            //ExecuteCommand(ConnectString, deleteUser);        
+            //string s = GetData(ConnectString, writeNames);
+            string a = GetData(ConnectString, highestPKID);
 
         void ExecuteCommand(string connectionString, string commandString)
         {
@@ -77,8 +86,9 @@ namespace Test_Connection
             }
         }
 
-void GetData(string connectionString, string commandString)
+        string GetData(string connectionString, string commandString)
         {
+            string str = "";
             // Controleert of er een verbinding is
             if (tryConnection(connectionString))
             {
@@ -97,10 +107,12 @@ void GetData(string connectionString, string commandString)
                         {
                             // Laat elk individueel object zien in een MessageBox
                             MessageBox.Show(String.Format(Convert.ToString(reader[0])));
+                            str += String.Format(Convert.ToString(reader[0]));
                         }
                     }        
                 }
             }
+            return str;
         }
 
         // Controleert of er connectie is
