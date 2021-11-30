@@ -57,11 +57,7 @@ namespace Test_Connection
 
 
 
-            //string resortPK =
-            //    @"DBCC CHECKIDENT('users', RESEED, 0)";
-
             // Voert SQL Querys uit
-            //ExecuteCommand(ConnectString, resortPK);
             //ExecuteCommand(ConnectString, addUser);
             //ExecuteCommand(ConnectString, updateName);
             //ExecuteCommand(ConnectString, deleteUser);        
