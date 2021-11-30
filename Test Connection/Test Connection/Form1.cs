@@ -44,9 +44,9 @@ namespace Test_Connection
             string writeNames =
                 @"SELECT name FROM users;";
 
+            // SQL Query om gebruiker toe te voegen en te verwijderen
             string addUser =
-                @"INSERT INTO groups (user1ID, user2ID, user3ID, naam, foto) values('1', '2', '5', 'De Quackeenden', 'foto7.png')";
-            //@"INSERT into users (name, foto, break) values('Joe Dad', 'foto6.png', '58')";
+                @"INSERT into users (name, foto, break) values('Joe Dad', 'foto6.png', '58')";
 
             string deleteUser =
                 @"DELETE FROM users WHERE users.id = 4";
