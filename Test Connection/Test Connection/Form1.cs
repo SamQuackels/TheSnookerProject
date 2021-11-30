@@ -27,19 +27,35 @@ namespace Test_Connection
         {
             // String aanmaken zodat je kan verbinden met de server
             string ConnectString = "datasource = localhost; port = 3306; username = root; password=; database = snooker";   
+            if (tryConnection(ConnectString))
+            {
+                MessageBox.Show("Verbinding Succesvol");
+            }
             
             // SQL Query om alle users met ID 2 hun naam aan te passen
             string updateName =
                 @"UPDATE users
-                  SET name = 'Ali Addas'
+                  SET name = 'Joe Mama'
                   WHERE ID = '2';";
 
             // SQL Query om alle namen van Users te verkrijgen
             string writeNames =
                 @"SELECT name FROM users;";
 
+            string addUser = 
+                @"INSERT into users (name, foto) values('Jeff', 'foto3.png')";
+
+            string deleteUser =
+                @"DELETE FROM users WHERE users.id = 4";
+
+            //string resortPK =
+            //    @"DBCC CHECKIDENT('users', RESEED, 0)";
+
             // Voert SQL Querys uit
+            //ExecuteCommand(ConnectString, resortPK);
+            ExecuteCommand(ConnectString, addUser);
             ExecuteCommand(ConnectString, updateName);
+            ExecuteCommand(ConnectString, deleteUser);        
             GetData(ConnectString, writeNames);          
         }
 
@@ -61,7 +77,7 @@ namespace Test_Connection
             }
         }
 
-        void GetData(string connectionString, string commandString)
+void GetData(string connectionString, string commandString)
         {
             // Controleert of er een verbinding is
             if (tryConnection(connectionString))
@@ -82,7 +98,7 @@ namespace Test_Connection
                             // Laat elk individueel object zien in een MessageBox
                             MessageBox.Show(String.Format(Convert.ToString(reader[0])));
                         }
-                    }
+                    }        
                 }
             }
         }
