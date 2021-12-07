@@ -22,7 +22,8 @@ namespace Test_Connection
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DBConnection();
+            //DBConnection();
+            DetermineWinner(ConnectString, 3);
         }
 
         private void DBConnection()
@@ -31,9 +32,10 @@ namespace Test_Connection
             {
                 MessageBox.Show("Verbinding Succesvol");
             }
+            string commandString = @"SELECT id FROM groupmatches";
 
-            AddItems(ConnectString, listBox1);
-
+            AddItems(ConnectString, commandString,  listBox1);
+            
             // SQL Query om alle users met ID 2 hun naam aan te passen
             string updateName =
                 @"UPDATE users
@@ -63,13 +65,14 @@ namespace Test_Connection
             //getGroupMatchData(3, ConnectString);
         }
 
-        void getGroupMatchData(int ID, string ConnectString)
+        List<string> getGroupMatchData(int ID, string ConnectString)
         {
             string command = String.Format(@"SELECT ID FROM matches WHERE GroupMatchID = '{0}'", ID);
-            string ids = GetData(ConnectString, command);
+            List<string> ids = GetData(ConnectString, command);
             command = String.Format(@"SELECT * FROM frames WHERE MatchID = '{0}' OR MatchID = '{1}' OR MatchID = '{2}'", ids[0], ids[1], ids[2]);
-            string fids = GetData(ConnectString, command);
-            MessageBox.Show(fids);
+            List<string> fids = GetData(ConnectString, command);
+            //MessageBox.Show(String.Join(", ",  fids.ToArray()));
+            return fids;
         }
 
         void ExecuteCommand(string connectionString, string commandString)
@@ -106,9 +109,9 @@ namespace Test_Connection
         }
 
 
-        string GetData(string connectionString, string commandString)
+        List<string> GetData(string connectionString, string commandString)
         {
-            string str = "";
+            List<string> a = new List<string>();
             // Controleert of er een verbinding is
             if (tryConnection(connectionString))
             {
@@ -127,17 +130,16 @@ namespace Test_Connection
                         {
                             // Laat elk individueel object zien in een MessageBox
                             //MessageBox.Show(String.Format(Convert.ToString(reader[0])));
-                            str += String.Format(Convert.ToString(reader[0]));
+                            a.Add(String.Format(Convert.ToString(reader[0])));
                         }
                     }
                 }
             }
-            return str;
+            return a;
         }
 
-        void AddItems(string connectionString, ListBox lb)
+        void AddItems(string connectionString, string commandString, ListBox lb)
         {
-            string commandString = @"SELECT id FROM groupmatches";
             if (tryConnection(connectionString))
             {
                 // Met gebruik van de connectie
@@ -163,6 +165,38 @@ namespace Test_Connection
         private void button2_Click(object sender, EventArgs e)
         {
             getGroupMatchData(Convert.ToInt32(listBox1.SelectedItem) ,ConnectString); 
+        }
+
+        void DetermineWinner(string connectString, int ID)
+        {
+            List<string> IDS = getGroupMatchData(ID, ConnectString);
+            int matcheswon = 0;
+            //MessageBox.Show(String.Join(", ", IDS.ToArray()));          
+            for (int i = 0 ;i <= 8 ;i += 3)
+            {
+                int matchwon = 0;
+                string command = String.Format(@"SELECT user1won FROM frames WHERE ID = '{0}' OR ID = '{1}' OR ID = '{2}'", IDS[0 + i], IDS[1 + i], IDS[2 + i]);
+                List<string> a = GetData(connectString, command);
+                MessageBox.Show(String.Join(", ", a.ToArray()));
+                a.ForEach(delegate (string s)
+                {
+                    if (Convert.ToBoolean(s)) matchwon++;
+                });
+                if (matchwon >= 2)
+                {
+                    matchwon = 1;
+                    matcheswon += 1;
+                }
+                else matchwon = 0;
+                a.Clear();
+                //MessageBox.Show(Convert.ToString(matchwon));
+                command = String.Format(@"UPDATE matches SET user1won = {0} WHERE Frame1ID = {1}", matchwon, IDS[0 + i]);
+                ExecuteCommand(connectString, command);
+            }
+            if (matcheswon >= 2) matcheswon = 1;
+            else matcheswon = 0;
+            string c = String.Format(@"UPDATE groupmatches SET group1won = {0} WHERE ID = {1}", matcheswon, ID);
+            ExecuteCommand(connectString, c);
         }
     }
 }
