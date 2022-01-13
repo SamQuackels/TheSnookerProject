@@ -122,3 +122,4 @@ else
 {
 	@"UPDATE groupmatches SET group1win = '0' WHERE ID = 'SELECT max(ID) from groupmatches'
 }
+
